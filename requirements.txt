@@ -7,8 +7,12 @@ python-multipart==0.0.6
 pydub==0.25.1
 faster-whisper==0.10.0
 
-# NLP & ML
+# NLP & ML (pinned versions with pre-built wheels)
 spacy==3.7.2
+spacy-legacy==3.0.12
+spacy-loggers==1.0.5
+blis==0.7.11
+thinc==8.2.1
 transformers==4.37.0
 torch>=2.2.0
 negspacy==1.0.4
