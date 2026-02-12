@@ -1,0 +1,259 @@
+term,label
+GERD,acidity
+abdominal and pelvic pain and pressure,belly_pain
+abdominal pain,abdominal_pain
+abdominal swelling,swelling_of_stomach
+abnormally low levels of oxygen in the arterial blood,breathlessness
+absence of menstrual periods,abnormal_menstruation
+acid reflux,acidity
+amaurosis fugax,blurred_and_distorted_vision
+amenorrhea,abnormal_menstruation
+angina,chest_pain
+anorexia,loss_of_appetite
+anxiety,anxiety
+arrhythmia,palpitations
+arthralgia,joint_pain
+asthenia,muscle_weakness
+ataxia,loss_of_balance
+back pain,back_pain
+black stool,bloody_stool
+black tarry faeces,bloody_stool
+blocked nose,congestion
+blood in stool,bloody_stool
+blurred vision,blurred_and_distorted_vision
+breathing problem,breathlessness
+breathlessness,breathlessness
+bruise,bruising
+bruising,bruising
+burning or stinging sensation when urinating,burning_micturition
+burning urination,burning_micturition
+cachexia,muscle_wasting
+cessation of menstrual periods,abnormal_menstruation
+chest pain,chest_pain
+chest tightness,chest_pain
+chills and shivering,chills
+chronic cough,cough
+cluster headache,headache
+cold chills,chills
+cold extremities,cold_hands_and_feets
+confusion,altered_sensorium
+constipated,constipation
+constipation,constipation
+cough,cough
+coughing,cough
+coughing blood,blood_in_sputum
+coughing more than usual,cough
+crushing chest pain,chest_pain
+delirium,altered_sensorium
+depressed,depression
+depression,depression
+diarrhea,diarrhoea
+difficulty breathing,breathlessness
+difficulty passing stool,constipation
+disorientation,altered_sensorium
+disrupted menstrual cycle,abnormal_menstruation
+dizziness,dizziness
+double vision,blurred_and_distorted_vision
+drowsiness,dizziness
+dry cough,cough
+dyspnea,breathlessness
+back pain,back_pain
+black stool,bloody_stool
+black tarry faeces,bloody_stool
+blocked nose,congestion
+blood in stool,bloody_stool
+blurred vision,blurred_and_distorted_vision
+breathing problem,breathlessness
+breathlessness,breathlessness
+bruise,bruising
+bruising,bruising
+burning or stinging sensation when urinating,burning_micturition
+burning urination,burning_micturition
+cachexia,muscle_wasting
+cessation of menstrual periods,abnormal_menstruation
+chest pain,chest_pain
+chest tightness,chest_pain
+chills and shivering,chills
+chronic cough,cough
+cluster headache,headache
+cold chills,chills
+cold extremities,cold_hands_and_feets
+confusion,altered_sensorium
+constipated,constipation
+constipation,constipation
+cough,cough
+coughing,cough
+coughing blood,blood_in_sputum
+coughing more than usual,cough
+crushing chest pain,chest_pain
+delirium,altered_sensorium
+depressed,depression
+depression,depression
+diarrhea,diarrhoea
+difficulty breathing,breathlessness
+difficulty passing stool,constipation
+disorientation,altered_sensorium
+disrupted menstrual cycle,abnormal_menstruation
+dizziness,dizziness
+double vision,blurred_and_distorted_vision
+drowsiness,dizziness
+dry cough,cough
+dyspnea,breathlessness
+ecchymosis,bruising
+emaciation,muscle_wasting
+emesis,vomiting
+euphoria,mood_swings
+excess amount of gas in the stomach and intestines,passage_of_gases
+excess mucus production,phlegm
+excessive accumulation of fluid in the body tissues,swollen_extremeties
+excessive heavy bleeding occurring at menstruation,abnormal_menstruation
+excessive thirst,dehydration
+exhaustion,fatigue
+faintness,dizziness
+fast heart rate,fast_heart_rate
+fatigue,fatigue
+febrile illness,high_fever
+feeling of something stuck in throat,throat_irritation
+feeling one is about to vomit,nausea
+fever,high_fever
+flatulence,passage_of_gases
+fluid accumulation,swelling_of_stomach
+forgetfulness,altered_sensorium
+foul-smelling urine,foul_smell_of urine
+frequent stools,diarrhoea
+frequent urge to urinate,continuous_feel_of_urine
+gas,passage_of_gases
+gastric pain,abdominal_pain
+general ill feeling,malaise
+giddiness,dizziness
+hard stools,constipation
+harsh in sound,throat_irritation
+headache,headache
+heart flutter,palpitations
+heartburn,acidity
+hematemesis,vomiting
+hemoptysis,blood_in_sputum
+high fever,high_fever
+hyperhidrosis,sweating
+incomplete evacuation,constipation
+increased urination,polyuria
+indigestion,indigestion
+infection of tissue around the toenail,inflammatory_nails
+irregular heartbeat,palpitations
+irregular pulse,palpitations
+irritability,irritability
+itch,itching
+itching,itching
+itchy and watery eyes,watering_from_eyes
+joint pain,joint_pain
+labored breathing,breathlessness
+lack of coordination,loss_of_balance
+lassitude,lethargy
+lethargy,lethargy
+lightheadedness,dizziness
+limited movement ability at the affected joint,movement_stiffness
+loose stools,diarrhoea
+losing weight,weight_loss
+loss of appetite,loss_of_appetite
+loss of balance,loss_of_balance
+low blood count,fatigue
+low blood pressure that occurs when standing up from sitting or lying down,dizziness
+low energy,fatigue
+low iron,fatigue
+low mood,depression
+low-grade fever,mild_fever
+malaise,malaise
+mania,mood_swings
+melena,bloody_stool
+memory loss,altered_sensorium
+migraine,headache
+missed periods,abnormal_menstruation
+muscle aches,muscle_pain
+myalgia,muscle_pain
+nasal congestion,congestion
+nasal discharge,runny_nose
+nausea,nausea
+need to wake up during the night to pass urine,polyuria
+night sweats,sweating
+nocturia,polyuria
+not being able to remember,altered_sensorium
+obesity,obesity
+overweight,obesity
+painful menstruation,abnormal_menstruation
+painful urination,burning_micturition
+palpitations,palpitations
+panic attacks,anxiety
+paralysis,muscle_weakness
+petechiae,bruising
+pharyngitis,throat_irritation
+phlegm,phlegm
+pleuritic chest pain,chest_pain
+polyuria,polyuria
+poor appetite,loss_of_appetite
+pounding heartbeat,palpitations
+pressure in chest,chest_pain
+productive cough,cough
+pruritus,itching
+pyrexia,high_fever
+rash,skin_rash
+rectal bleeding,bloody_stool
+red eyes,redness_of_eyes
+reduced appetite,loss_of_appetite
+relating to fever,high_fever
+rhinorrhea,runny_nose
+rigors,chills
+rough in sound,throat_irritation
+runny nose,runny_nose
+sadness,depression
+sciatica,back_pain
+scratchy throat,throat_irritation
+shivering,chills
+short of breath,breathlessness
+shortness of breath,breathlessness
+shortness of breath on exertion,breathlessness
+sickness,nausea
+skin eruption,skin_rash
+skipping beats,palpitations
+slurred speech,slurred_speech
+sneezing,continuous_sneezing
+somnolence,dizziness
+sore throat,throat_irritation
+spinning sensation,spinning_movements
+sputum production,phlegm
+stiffness,movement_stiffness
+stiffness in joints,movement_stiffness
+stomach ache,abdominal_pain
+stop breathing,breathlessness
+stuffy nose,congestion
+sudden and severe allergic reaction,anxiety
+sweating,sweating
+sweats,sweating
+swelling,swelling_joints
+swelling of the toe around the nail,swelling_joints
+tachycardia,fast_heart_rate
+temperature,high_fever
+temporary blindness,blurred_and_distorted_vision
+tenesmus,constipation
+tension headache,headache
+throwing up,vomiting
+tired,fatigue
+tiredness,fatigue
+tonsillitis,throat_irritation
+ulcer,ulcers_on_tongue
+ulcers,ulcers_on_tongue
+unintentional weight loss,weight_loss
+unsteady gait,unsteadiness
+upset stomach,nausea
+urinary frequency,polyuria
+vertigo,spinning_movements
+visual disturbances,visual_disturbances
+voice changes,throat_irritation
+vomiting,vomiting
+vomiting blood,vomiting
+wasting,muscle_wasting
+watery stools,diarrhoea
+weakness,muscle_weakness
+weight gain,weight_gain
+weight loss,weight_loss
+wet cough,cough
+worry,anxiety

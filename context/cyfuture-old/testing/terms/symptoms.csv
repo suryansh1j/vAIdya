@@ -1,0 +1,306 @@
+term,label
+anorexia,PROBLEM
+loss of appetite,PROBLEM
+reduced appetite,PROBLEM
+poor appetite,PROBLEM
+weight loss,PROBLEM
+losing weight,PROBLEM
+unintentional weight loss,PROBLEM
+cachexia,PROBLEM
+wasting,PROBLEM
+emaciation,PROBLEM
+weight gain,PROBLEM
+overweight,PROBLEM
+obesity,PROBLEM
+chills and shivering,PROBLEM
+rigors,PROBLEM
+shivering,PROBLEM
+cold chills,PROBLEM
+fever,PROBLEM
+pyrexia,PROBLEM
+temperature,PROBLEM
+febrile illness,PROBLEM
+low-grade fever,PROBLEM
+high fever,PROBLEM
+sweating,PROBLEM
+sweats,PROBLEM
+night sweats,PROBLEM
+hyperhidrosis,PROBLEM
+malaise,PROBLEM
+general ill feeling,PROBLEM
+fatigue,PROBLEM
+tiredness,PROBLEM
+weakness,PROBLEM
+asthenia,PROBLEM
+exhaustion,PROBLEM
+lassitude,PROBLEM
+lethargy,PROBLEM
+low energy,PROBLEM
+drowsiness,PROBLEM
+somnolence,PROBLEM
+faintness,PROBLEM
+dizziness,PROBLEM
+lightheadedness,PROBLEM
+vertigo,PROBLEM
+spinning sensation,PROBLEM
+giddiness,PROBLEM
+blackout,PROBLEM
+loss of consciousness,PROBLEM
+collapse,PROBLEM
+syncope,PROBLEM
+fainting,PROBLEM
+confusion,PROBLEM
+disorientation,PROBLEM
+delirium,PROBLEM
+slurred speech,PROBLEM
+loss of balance,PROBLEM
+lack of coordination,PROBLEM
+ataxia,PROBLEM
+unsteady gait,PROBLEM
+term,label
+arrhythmia,PROBLEM
+irregular heartbeat,PROBLEM
+irregular pulse,PROBLEM
+bradycardia,PROBLEM
+slow heart rate,PROBLEM
+tachycardia,PROBLEM
+fast heart rate,PROBLEM
+palpitations,PROBLEM
+heart flutter,PROBLEM
+skipping beats,PROBLEM
+pounding heartbeat,PROBLEM
+chest pain,PROBLEM
+angina,PROBLEM
+chest tightness,PROBLEM
+pressure in chest,PROBLEM
+crushing chest pain,PROBLEM
+shortness of breath on exertion,PROBLEM
+claudication,PROBLEM
+leg pain on exercise,PROBLEM
+cold extremities,PROBLEM
+cyanosis,PROBLEM
+bluish lips,PROBLEM
+faint pulse,PROBLEM
+term,label
+cough,PROBLEM
+chronic cough,PROBLEM
+dry cough,PROBLEM
+productive cough,PROBLEM
+wet cough,PROBLEM
+coughing blood,PROBLEM
+hemoptysis,PROBLEM
+breathlessness,PROBLEM
+shortness of breath,PROBLEM
+dyspnea,PROBLEM
+labored breathing,PROBLEM
+difficulty breathing,PROBLEM
+wheezing,PROBLEM
+whistling respiration,PROBLEM
+snoring,PROBLEM
+apnea,PROBLEM
+hypopnea,PROBLEM
+orthopnea,PROBLEM
+platypnea,PROBLEM
+trepopnea,PROBLEM
+pleuritic chest pain,PROBLEM
+sputum production,PROBLEM
+phlegm,PROBLEM
+nasal congestion,PROBLEM
+blocked nose,PROBLEM
+stuffy nose,PROBLEM
+runny nose,PROBLEM
+rhinorrhea,PROBLEM
+nasal discharge,PROBLEM
+epistaxis,PROBLEM
+nosebleed,PROBLEM
+sore throat,PROBLEM
+pharyngitis,PROBLEM
+scratchy throat,PROBLEM
+tonsillitis,PROBLEM
+difficulty swallowing,PROBLEM
+dysphagia,PROBLEM
+odynophagia,PROBLEM
+ear pain,PROBLEM
+otalgia,PROBLEM
+ear discharge,PROBLEM
+otorrhea,PROBLEM
+ringing in the ears,PROBLEM
+tinnitus,PROBLEM
+hearing loss,PROBLEM
+deafness,PROBLEM
+toothache,PROBLEM
+dental pain,PROBLEM
+bad breath,PROBLEM
+halitosis,PROBLEM
+term,label
+abdominal pain,PROBLEM
+stomach ache,PROBLEM
+gastric pain,PROBLEM
+belching,PROBLEM
+bloating,PROBLEM
+flatulence,PROBLEM
+gas,PROBLEM
+heartburn,PROBLEM
+acid reflux,PROBLEM
+GERD,PROBLEM
+indigestion,PROBLEM
+nausea,PROBLEM
+sickness,PROBLEM
+upset stomach,PROBLEM
+vomiting,PROBLEM
+emesis,PROBLEM
+throwing up,PROBLEM
+hematemesis,PROBLEM
+vomiting blood,PROBLEM
+melena,PROBLEM
+black stool,PROBLEM
+rectal bleeding,PROBLEM
+blood in stool,PROBLEM
+diarrhea,PROBLEM
+loose stools,PROBLEM
+watery stools,PROBLEM
+frequent stools,PROBLEM
+constipation,PROBLEM
+hard stools,PROBLEM
+difficulty passing stool,PROBLEM
+tenesmus,PROBLEM
+incomplete evacuation,PROBLEM
+steatorrhea,PROBLEM
+fatty stool,PROBLEM
+greasy stool,PROBLEM
+fecal incontinence,PROBLEM
+soiling,PROBLEM
+loss of bowel control,PROBLEM
+term,label
+headache,PROBLEM
+migraine,PROBLEM
+cluster headache,PROBLEM
+tension headache,PROBLEM
+seizures,PROBLEM
+fits,PROBLEM
+convulsions,PROBLEM
+tremor,PROBLEM
+shaking,PROBLEM
+trembling,PROBLEM
+dystonia,PROBLEM
+muscle spasms,PROBLEM
+stiffness,PROBLEM
+paralysis,PROBLEM
+weakness,PROBLEM
+numbness,PROBLEM
+paresthesia,PROBLEM
+pins and needles,PROBLEM
+tingling,PROBLEM
+visual disturbances,PROBLEM
+blurred vision,PROBLEM
+double vision,PROBLEM
+amaurosis fugax,PROBLEM
+temporary blindness,PROBLEM
+red eyes,PROBLEM
+eye pain,PROBLEM
+photophobia,PROBLEM
+sensitivity to light,PROBLEM
+insomnia,PROBLEM
+difficulty sleeping,PROBLEM
+sleep disturbance,PROBLEM
+hallucinations,PROBLEM
+delusions,PROBLEM
+confabulation,PROBLEM
+depression,PROBLEM
+low mood,PROBLEM
+sadness,PROBLEM
+anxiety,PROBLEM
+worry,PROBLEM
+panic attacks,PROBLEM
+irritability,PROBLEM
+euphoria,PROBLEM
+mania,PROBLEM
+psychosis,PROBLEM
+paranoia,PROBLEM
+suicidal thoughts,PROBLEM
+suicidal ideation,PROBLEM
+thoughts of self-harm,PROBLEM
+homicidal ideation,PROBLEM
+term,label
+dysuria,PROBLEM
+painful urination,PROBLEM
+burning urination,PROBLEM
+hematuria,PROBLEM
+blood in urine,PROBLEM
+red urine,PROBLEM
+polyuria,PROBLEM
+urinary frequency,PROBLEM
+nocturia,PROBLEM
+increased urination,PROBLEM
+urinary retention,PROBLEM
+urinary incontinence,PROBLEM
+leakage of urine,PROBLEM
+urethral discharge,PROBLEM
+penile discharge,PROBLEM
+vaginal discharge,PROBLEM
+vaginal bleeding,PROBLEM
+postmenopausal bleeding,PROBLEM
+bleeding during pregnancy,PROBLEM
+amenorrhea,PROBLEM
+missed periods,PROBLEM
+infertility,PROBLEM
+subfertility,PROBLEM
+painful intercourse,PROBLEM
+dyspareunia,PROBLEM
+pelvic pain,PROBLEM
+back pain,PROBLEM
+sciatica,PROBLEM
+joint pain,PROBLEM
+arthralgia,PROBLEM
+myalgia,PROBLEM
+muscle aches,PROBLEM
+rash,PROBLEM
+skin eruption,PROBLEM
+hives,PROBLEM
+urticaria,PROBLEM
+bruising,PROBLEM
+ecchymosis,PROBLEM
+petechiae,PROBLEM
+itching,PROBLEM
+pruritus,PROBLEM
+alopecia,PROBLEM
+hair loss,PROBLEM
+hirsutism,PROBLEM
+excessive hair growth,PROBLEM
+lesion,PROBLEM
+wound,PROBLEM
+abrasion,PROBLEM
+laceration,PROBLEM
+ulcer,PROBLEM
+diabetes,DISEASE
+type 1 diabetes,DISEASE
+type 2 diabetes,DISEASE
+insulin-dependent diabetes,DISEASE
+hypertension,DISEASE
+high blood pressure,DISEASE
+hypotension,DISEASE
+heart attack,DISEASE
+myocardial infarction,DISEASE
+stroke,DISEASE
+cerebrovascular accident,DISEASE
+cancer,DISEASE
+breast cancer,DISEASE
+lung cancer,DISEASE
+colon cancer,DISEASE
+leukemia,DISEASE
+lymphoma,DISEASE
+asthma,DISEASE
+tuberculosis,DISEASE
+hiv,DISEASE
+aids,DISEASE
+covid-19,DISEASE
+influenza,DISEASE
+pneumonia,DISEASE
+malaria,DISEASE
+typhoid,DISEASE
+arthritis,DISEASE
+osteoarthritis,DISEASE
+rheumatoid arthritis,DISEASE
+parkinson's disease,DISEASE
+alzheimer's disease,DISEASE
+epilepsy,DISEASE

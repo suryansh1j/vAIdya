@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doctor's Notes - Patient Info</title>
+  <link rel="stylesheet" href="../style/doctor_notes.css" />
+</head>
+<body>
+  <h2>Doctor's Notes - Patient Info</h2>
+  <form id="patientInfoForm">
+    <label for="PatientName">Patient Name:</label>
+    <input type="text" id="PatientName" name="PatientName" /><br/>
+
+    <label for="Age">Age:</label>
+    <input type="text" id="Age" name="Age" /><br/>
+
+    <label for="Gender">Gender:</label>
+    <input type="text" id="Gender" name="Gender" /><br/>
+
+    <label for="ChiefComplaint">Chief Complaint:</label>
+    <textarea id="ChiefComplaint" name="ChiefComplaint" rows="2"></textarea><br/>
+
+    <label for="PastMedicalHistory">Past Medical History:</label>
+    <textarea id="PastMedicalHistory" name="PastMedicalHistory" rows="2"></textarea><br/>
+
+    <label for="FamilyHistory">Family History:</label>
+    <textarea id="FamilyHistory" name="FamilyHistory" rows="2"></textarea><br/>
+
+    <label for="PreviousSurgeries">Previous Surgeries:</label>
+    <textarea id="PreviousSurgeries" name="PreviousSurgeries" rows="2"></textarea><br/>
+
+    <label for="Lifestyle">Lifestyle:</label>
+    <textarea id="Lifestyle" name="Lifestyle" rows="2"></textarea><br/>
+
+    <label for="Allergies">Allergies:</label>
+    <textarea id="Allergies" name="Allergies" rows="2"></textarea><br/>
+
+    <label for="CurrentMedications">Current Medications:</label>
+    <textarea id="CurrentMedications" name="CurrentMedications" rows="2"></textarea><br/>
+  </form>
+
+  <button onclick="window.location.href='index.html'">Back to Upload</button>
+
+  <script src="../scripts/doctor_notes.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+</html>

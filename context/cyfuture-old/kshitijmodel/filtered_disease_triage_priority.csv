@@ -1,0 +1,39 @@
+Disease,Priority Score,Justification
+Heart attack,1,Immediate death of heart muscle. Requires urgent intervention to prevent death or permanent heart damage.
+Paralysis (brain hemorrhage),1,"Acute bleeding in the brain causing rapid neurological damage, paralysis, and high risk of death."
+AIDS,2,"Weakens the immune system, leading to life-threatening opportunistic infections. Requires lifelong management."
+Alcoholic hepatitis,2,Severe inflammation of the liver that can lead to liver failure.
+Chronic cholestasis,2,Long-term bile flow obstruction can lead to irreversible liver damage and cirrhosis.
+Hepatitis B,2,Chronic infection can lead to liver cirrhosis and liver cancer over time.
+Hepatitis C,2,Chronic infection is a leading cause of liver cirrhosis and cancer.
+Hepatitis D,2,"Causes more severe liver disease than Hepatitis B alone, accelerating cirrhosis."
+Hepatitis E,2,"Usually self-limiting but can cause acute liver failure, especially in pregnant women."
+Hypoglycemia,2,"Severe low blood sugar can lead to seizures, coma, and brain damage if not treated immediately."
+Jaundice,2,"A symptom, but high levels of bilirubin can be toxic, especially to the brains of newborns."
+Malaria,2,"Severe forms (P. falciparum) can cause coma, seizures, and death. Requires prompt treatment to prevent complications."
+Peptic ulcer diseae,2,Can lead to severe internal bleeding or perforation of the stomach wall.
+Pneumonia,2,Severe infection can lead to respiratory failure and sepsis. Requires timely antibiotics.
+Tuberculosis,2,Can cause permanent lung damage and spread to other organs. Untreated active TB has a high mortality rate over time.
+Acne,3,"Skin condition with low risk of permanent physical harm, though it can cause scarring."
+Allergy,3,"Anaphylaxis is a Priority 1 emergency, but common allergies are non-urgent."
+Arthritis,3,"Causes chronic pain and joint damage, leading to disability over time."
+Bronchial Asthma,3,"Chronic condition, but an acute severe attack can be life-threatening (Priority 1-2). Routine management is less urgent."
+Cervical spondylosis,3,"Age-related wear and tear of spinal disks in the neck, causing chronic pain."
+Chicken pox,3,Usually mild in children but can be severe in adults or lead to shingles later in life.
+Common Cold,3,"Mild, self-limiting viral infection."
+Dengue,3,Generally considered non-life-threatening or slow-progressing.
+Dimorphic hemmorhoids(piles),3,Painful but rarely life-threatening. Severe bleeding can occur but is uncommon.
+Drug Reaction,3,"Severity varies widely. Anaphylaxis is Priority 1, but mild rashes are Priority 3."
+Fungal infection,3,Typically localized skin infections. Invasive fungal infections in immunocompromised people are emergencies.
+GERD,3,Chronic acid reflux. Can lead to long-term esophageal damage (Barrett's esophagus) but not an immediate threat.
+Gastroenteritis,3,"Usually self-limiting. Dehydration is the main concern, especially in vulnerable populations."
+Hyperthyroidism,3,"Speeds up metabolism. A ""thyroid storm"" is a rare, life-threatening emergency (Priority 1), but standard cases are less urgent."
+Hypothyroidism,3,"Slows metabolism. Untreated long-term can lead to heart problems, but not an immediate crisis."
+Impetigo,3,"Bacterial skin infection, usually not serious."
+Migraine,3,Causes severe headaches but does not typically cause permanent harm.
+Osteoarthristis,3,Degenerative joint disease causing chronic pain and reduced mobility.
+Psoriasis,3,Chronic autoimmune skin disease. Associated with other health conditions but not an immediate threat.
+Typhoid,3,Generally considered non-life-threatening or slow-progressing.
+Urinary tract infection,3,"Can progress to a serious kidney infection (pyelonephritis) if untreated, but typically manageable."
+Varicose veins,3,"Enlarged veins. Can lead to clots or ulcers, but typically a slow-progressing condition."
+hepatitis A,3,Generally considered non-life-threatening or slow-progressing.

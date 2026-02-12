@@ -1,0 +1,91 @@
+oklay so we record or upload an audio to our site and the audio is then processed using whisper and a transcript is generated.....
+
+now 2 functions are there for our site
+a seperate page leads to a disease predictor using stage1.2.py we return a csv file with the symptoms which is passed through model.pkt which returns the outcomes that we need in our site to display most probable diseases with their confidence score
+
+the 2nd function is that with the transcript we will autofill a doctors form with all clinical notes like <!DOCTYPE html>
+
+<html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <title>Doctor's Clinical Notes</title> <link rel="stylesheet" href="styles/clinical_notes.css" /> </head> <body> <main class="container"> <h1 class="page-title">Doctor's Clinical Notes</h1>
+<form id="clinicalForm" class="form-grid">
+
+  <section class="form-section">
+    <label for="patientName" class="form-label">Patient Name</label>
+    <input type="text" id="patientName" name="patientName" placeholder="Enter patient name" />
+  </section>
+
+  <section class="form-section">
+    <label for="patientAge" class="form-label">Age</label>
+    <input type="number" id="patientAge" name="patientAge" placeholder="Enter age" min="0" />
+  </section>
+
+  <section class="form-section">
+    <label for="patientGender" class="form-label">Gender</label>
+    <select id="patientGender" name="patientGender" aria-label="Select Gender">
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+  </section>
+
+  <section class="form-section long">
+    <label for="chiefComplaint" class="form-label">Chief Complaint</label>
+    <textarea id="chiefComplaint" name="chiefComplaint" rows="3" placeholder="Patient’s main reason for visit"></textarea>
+  </section>
+
+  <section class="form-section long">
+    <label for="symptoms" class="form-label">Symptoms (Analytical Review)</label>
+    <textarea id="symptoms" name="symptoms" rows="4" placeholder="Extracted symptoms from analytical review" readonly></textarea>
+  </section>
+
+  <section class="form-section long">
+    <label for="pastMedicalHistory" class="form-label">Past Medical History</label>
+    <textarea id="pastMedicalHistory" name="pastMedicalHistory" rows="4" placeholder="Previous illnesses, chronic conditions"></textarea>
+  </section>
+
+  <section class="form-section long">
+    <label for="familyHistory" class="form-label">Family History</label>
+    <textarea id="familyHistory" name="familyHistory" rows="4" placeholder="Relevant hereditary/familial diseases"></textarea>
+  </section>
+
+  <section class="form-section long">
+    <label for="previousSurgeries" class="form-label">Previous Surgeries</label>
+    <textarea id="previousSurgeries" name="previousSurgeries" rows="4" placeholder="Details of past surgeries"></textarea>
+  </section>
+
+  <section class="form-section">
+    <label for="lifestyle" class="form-label">Lifestyle</label>
+    <textarea id="lifestyle" name="lifestyle" rows="3" placeholder="Smoking, alcohol, exercise habits"></textarea>
+  </section>
+
+  <section class="form-section">
+    <label for="allergies" class="form-label">Allergies</label>
+    <textarea id="allergies" name="allergies" rows="3" placeholder="Known drug, food, or environmental allergies"></textarea>
+  </section>
+
+  <section class="form-section">
+    <label for="currentMedications" class="form-label">Current Medications</label>
+    <textarea id="currentMedications" name="currentMedications" rows="3" placeholder="Medications the patient is currently taking"></textarea>
+  </section>
+
+  <section class="form-section long">
+    <label for="doctorsDiagnosis" class="form-label">Doctor’s Diagnosis</label>
+    <textarea id="doctorsDiagnosis" name="doctorsDiagnosis" rows="4" placeholder="Clinical diagnosis"></textarea>
+  </section>
+
+  <section class="form-section">
+    <label for="recommendedTests" class="form-label">Doctor’s Recommended Tests</label>
+    <textarea id="recommendedTests" name="recommendedTests" rows="3" placeholder="Tests advised by the doctor"></textarea>
+  </section>
+
+  <section class="form-section">
+    <label for="prescribedMedications" class="form-label">Doctor’s Prescribed Medications</label>
+    <textarea id="prescribedMedications" name="prescribedMedications" rows="3" placeholder="Medications prescribed by the doctor"></textarea>
+  </section>
+
+</form>
+
+<button id="downloadPdfBtn" class="btn btn-primary">Download Clinical Notes as PDF</button>
+
+<div id="reportPreview" style="display:none;"></div>
+</main> <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> <script src="scripts/clinical_notes.js" defer></script> </body> </html> PLEASE BUILD AN ENTIRE WEBSITE FROM THIS

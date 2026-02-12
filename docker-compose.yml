@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  vaidya-app:
+    build: .
+    container_name: vaidya
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./vaidya.db
+      - DEBUG=False
+      - ENVIRONMENT=production
+    volumes:
+      - ./audio:/app/audio
+      - ./transcripts:/app/transcripts
+      - ./logs:/app/logs
+      - ./vaidya.db:/app/vaidya.db
+    restart: unless-stopped
+    
+  # Optional: PostgreSQL database
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: vaidya-db
+  #   environment:
+  #     POSTGRES_USER: vaidya
+  #     POSTGRES_PASSWORD: changeme
+  #     POSTGRES_DB: vaidya
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+# volumes:
+#   postgres_data:

@@ -1,0 +1,11 @@
+# predictions = model.predict(X_test)
+# accuracy = accuracy_score(y_test, predictions)
+# print(f"\nModel Accuracy: {accuracy * 100:.2f}%")
+#
+# cv = StratifiedKFold(n_splits=10, shuffle=True)
+# scores = cross_val_score(model, X_noisy, y, cv=cv, scoring="accuracy")
+# print("Cross-validation scores:", scores)
+# print("Mean accuracy:", scores.mean())
+
+, cross_val_score, StratifiedKFold
+from sklearn.metrics import accuracy_score, classification_report

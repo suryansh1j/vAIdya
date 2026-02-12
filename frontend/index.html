@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vAIdya - AI-Powered Medical Assistant</title>
+  <link rel="stylesheet" href="./style/index.css" />
+</head>
+
+<body>
+  <!-- Authentication Modal -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="authTitle">Login to vAIdya</h2>
+
+      <div id="loginForm" class="auth-form">
+        <input type="text" id="loginUsername" name="username" placeholder="Username" required autocomplete="username" />
+        <input type="password" id="loginPassword" name="password" placeholder="Password" required
+          autocomplete="current-password" />
+        <button id="loginBtn" class="btn-primary">Login</button>
+        <p class="auth-switch">Don't have an account? <span id="showRegister">Register</span></p>
+      </div>
+
+      <div id="registerForm" class="auth-form" style="display: none;">
+        <input type="text" id="regUsername" name="username" placeholder="Username" required autocomplete="username" />
+        <input type="email" id="regEmail" name="email" placeholder="Email" required autocomplete="email" />
+        <input type="password" id="regPassword" name="password" placeholder="Password" required
+          autocomplete="new-password" />
+        <input type="text" id="regFullName" name="fullName" placeholder="Full Name (optional)" autocomplete="name" />
+        <button id="registerBtn" class="btn-primary">Register</button>
+        <p class="auth-switch">Already have an account? <span id="showLogin">Login</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="spinner-large"></div>
+    <p class="loading-text">Processing audio...</p>
+    <p class="loading-subtext">This may take 3-5 minutes on first run</p>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <p class="progress-text" id="progressText">Uploading...</p>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Navigation Header -->
+    <header class="app-header">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="18" fill="#06B6D4" />
+            <path d="M20 10 L20 30 M10 20 L30 20" stroke="white" stroke-width="3" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>vAIdya</h1>
+          <p>Your AI-Powered Medical Companion</p>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <button class="nav-tab active" data-tab="audio">
+          <span class="nav-icon">🎤</span>
+          <span class="nav-label">Audio Processing</span>
+        </button>
+        <button class="nav-tab" data-tab="chat">
+          <span class="nav-icon">💬</span>
+          <span class="nav-label">Chat Assistant</span>
+        </button>
+        <button class="nav-tab" data-tab="records">
+          <span class="nav-icon">📋</span>
+          <span class="nav-label">Patient Records</span>
+        </button>
+        <button class="nav-tab" data-tab="health">
+          <span class="nav-icon">❤️</span>
+          <span class="nav-label">Health Checker</span>
+        </button>
+      </nav>
+
+      <div class="user-section">
+        <span id="userDisplay" class="user-name"></span>
+        <button id="logoutBtn" class="btn-logout" style="display: none;">Logout</button>
+      </div>
+    </header>
+
+    <!-- Tab Content -->
+    <main class="tab-content">
+
+      <!-- TAB 1: Audio Processing -->
+      <div id="audioTab" class="tab-pane active">
+        <div class="hero-banner blue-gradient">
+          <div class="hero-icon">📊</div>
+          <h2>AI-Powered Medical Audio Transcription</h2>
+          <p>Record or upload patient consultations for structured notes</p>
+        </div>
+
+        <div class="two-column-layout">
+          <!-- Left: Audio Recorder -->
+          <div class="card recorder-card">
+            <h3>🎤 Record Audio</h3>
+            <div class="recorder-interface">
+              <button id="recordBtn" class="mic-button">
+                <div class="mic-icon">🎙️</div>
+              </button>
+              <div id="recordingStatus" class="recording-status"></div>
+              <div id="timerDisplay" class="timer">00:00</div>
+              <audio id="audioPlayback" controls style="display: none;"></audio>
+            </div>
+          </div>
+
+          <!-- Right: File Upload -->
+          <div class="card upload-card">
+            <h3>📁 Upload Audio File</h3>
+            <div class="upload-zone" id="uploadZone">
+              <div class="upload-icon">📎</div>
+              <p class="upload-text">Click to upload or drag and drop</p>
+              <p class="upload-specs">M4A, WAV, MP3, OGG (max 50MB)</p>
+              <input type="file" id="audioFile" accept=".m4a,.wav,.mp3,.ogg" hidden />
+              <button id="browseBtn" class="btn-secondary">Browse Files</button>
+            </div>
+            <div id="fileName" class="file-name"></div>
+          </div>
+        </div>
+
+        <!-- Process Button -->
+        <div class="action-section">
+          <button id="processBtn" class="btn-process" disabled>
+            <span>🚀 Process Audio</span>
+          </button>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-section" style="display: none;">
+          <h3 class="results-title">✅ Processing Complete</h3>
+
+          <!-- Transcript -->
+          <div class="card result-card">
+            <h4>📝 Transcript</h4>
+            <div class="transcript-box" id="transcriptText"></div>
+          </div>
+
+          <!-- Patient Information -->
+          <div class="card result-card">
+            <h4>👤 Patient Information</h4>
+            <div class="patient-info-grid" id="patientInfoGrid"></div>
+          </div>
+
+          <!-- Symptoms -->
+          <div class="card result-card">
+            <h4>💊 Symptoms Analysis</h4>
+            <div class="symptoms-container">
+              <div class="symptoms-column">
+                <h5>✅ Affirmed Symptoms</h5>
+                <div id="affirmedSymptoms" class="symptom-list"></div>
+              </div>
+              <div class="symptoms-column">
+                <h5>❌ Negated Symptoms</h5>
+                <div id="negatedSymptoms" class="symptom-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="result-actions">
+            <button id="downloadPdfBtn" class="btn-secondary">📄 Download PDF</button>
+            <button id="viewNotesBtn" class="btn-primary" onclick="window.location.href='doctor_notes.html'">
+              📋 View Doctor Notes
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Chat Assistant -->
+      <div id="chatTab" class="tab-pane">
+        <div class="hero-banner purple-gradient">
+          <div class="hero-icon">💬</div>
+          <h2>Medical Chat Assistant</h2>
+          <p>AI-powered consultation support and medical queries</p>
+          <span class="badge-beta">Coming Soon</span>
+        </div>
+
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="bot-avatar">🤖</div>
+            <div class="bot-info">
+              <h4>Medicine Assistant</h4>
+              <p class="status-online">● Online</p>
+            </div>
+          </div>
+
+          <div class="chat-messages">
+            <div class="message bot-message">
+              <div class="message-avatar">🤖</div>
+              <div class="message-content">
+                <p>Hello! I'm your Medicine Assistant. I can help you understand how to use your medications, their side
+                  effects, interactions, and answer any questions about your prescriptions. How can I help you today?
+                </p>
+                <span class="message-time">Just now</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-questions">
+            <button class="quick-btn">Explain extracted symptoms</button>
+            <button class="quick-btn">Suggest differential diagnosis</button>
+            <button class="quick-btn">Medical terminology lookup</button>
+            <button class="quick-btn">Treatment protocols</button>
+          </div>
+
+          <div class="chat-input-container">
+            <input type="text" class="chat-input" placeholder="Type your message..." disabled />
+            <button class="send-btn" disabled>Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Patient Records -->
+      <div id="recordsTab" class="tab-pane">
+        <div class="hero-banner green-gradient">
+          <div class="hero-icon">📋</div>
+          <h2>Patient History Database</h2>
+          <p>View and manage all patient consultations</p>
+        </div>
+
+        <div class="records-layout">
+          <!-- Search and Filter -->
+          <div class="search-section">
+            <input type="text" id="patientSearch" class="search-input"
+              placeholder="🔍 Search by name, date, or symptoms..." />
+          </div>
+
+          <div class="two-column-layout">
+            <!-- Patient List -->
+            <div class="card patient-list-card">
+              <h4>Patient List</h4>
+              <div id="patientList" class="patient-list">
+                <p class="empty-state">No patients found. Process an audio file to create records.</p>
+              </div>
+            </div>
+
+            <!-- Patient Details -->
+            <div class="card patient-detail-card">
+              <div id="patientDetail" class="patient-detail">
+                <div class="empty-state-large">
+                  <div class="empty-icon">📄</div>
+                  <p>Select a patient to view details</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Health Checker -->
+      <div id="healthTab" class="tab-pane">
+        <div class="hero-banner pink-gradient">
+          <div class="hero-icon">❤️</div>
+          <h2>Symptom Analysis</h2>
+          <p>AI-powered health symptom checker</p>
+          <span class="badge-beta">Coming Soon</span>
+        </div>
+
+        <div class="health-checker-container">
+          <div class="symptom-input-section">
+            <div class="input-group">
+              <input type="text" class="symptom-input" placeholder="Describe symptoms..." disabled />
+              <button class="mic-btn-small" disabled>🎤</button>
+              <button class="analyze-btn" disabled>Analyze</button>
+            </div>
+          </div>
+
+          <div class="common-symptoms">
+            <h4>Common Symptoms</h4>
+            <div class="symptoms-grid">
+              <button class="symptom-chip" disabled>🤒 Fever</button>
+              <button class="symptom-chip" disabled>😷 Cough</button>
+              <button class="symptom-chip" disabled>🤕 Headache</button>
+              <button class="symptom-chip" disabled>💔 Chest Pain</button>
+              <button class="symptom-chip" disabled>🤢 Nausea</button>
+              <button class="symptom-chip" disabled>😴 Fatigue</button>
+              <button class="symptom-chip" disabled>😵 Dizziness</button>
+              <button class="symptom-chip" disabled>🫁 Shortness of Breath</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="./scripts/auth.js"></script>
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>
