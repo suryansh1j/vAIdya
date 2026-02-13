@@ -10,12 +10,24 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
+# Set environment variables for binary wheel enforcement
+ENV PIP_ONLY_BINARY=":all:" \
+    PIP_PREFER_BINARY=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    CFLAGS="-Wno-unused-function -Wno-unused-variable -O2" \
+    CXXFLAGS="-Wno-unused-function -Wno-unused-variable -O2"
+
 # Upgrade pip to latest version for better wheel support
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip setuptools wheel
+
+# Copy pip configuration
+COPY pip.conf /etc/pip.conf
 
 # Copy requirements and install with preference for binary wheels
 COPY requirements.txt .
-RUN pip install --no-cache-dir --prefer-binary -r requirements.txt
+RUN pip install --only-binary=:all: --prefer-binary --no-cache-dir -r requirements.txt || \
+    pip install --prefer-binary --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .

@@ -1,3 +1,6 @@
+# Render-optimized requirements with binary wheel availability
+# Use this file if the main requirements.txt fails to build
+
 # Core Backend Framework
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
@@ -5,11 +8,14 @@ python-multipart==0.0.6
 
 # Audio Processing
 pydub==0.25.1
+# Note: faster-whisper may require compilation, consider alternatives
 faster-whisper==0.10.0
 
-# NLP & ML (using versions with pre-built wheels)
-spacy==3.7.4
+# NLP & ML - Using versions with guaranteed binary wheels
+# Option 1: Latest spacy with wheels (recommended)
+spacy==3.7.4 --only-binary spacy
 transformers==4.37.0
+torch>=2.2.0 --index-url https://download.pytorch.org/whl/cpu
 negspacy==1.0.4
 
 # Database
