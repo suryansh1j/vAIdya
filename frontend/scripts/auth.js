@@ -1,6 +1,7 @@
 // ==================== Authentication Module ====================
 
-const AUTH_API = '/api/v1/auth';
+const API_BASE_URL = 'https://vaidya-qppb.onrender.com';
+const AUTH_API = `${API_BASE_URL}/api/v1/auth`;
 const TOKEN_KEY = 'vaidya_token';
 const USER_KEY = 'vaidya_user';
 
