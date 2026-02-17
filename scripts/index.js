@@ -7,7 +7,8 @@ let timerInterval = null;
 let recordedBlob = null;
 let currentPatientId = null;
 
-const API_BASE = '/api/v1';
+const API_BASE_URL = 'https://vaidya-qppb.onrender.com';
+const API_BASE = `${API_BASE_URL}/api/v1`;
 
 // ==================== Tab Switching ====================
 
