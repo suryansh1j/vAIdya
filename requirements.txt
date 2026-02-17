@@ -9,7 +9,7 @@ pydub==0.25.1
 # Use alternative: openai-whisper or speech_recognition
 
 # Database
-sqlalchemy==2.0.25
+sqlalchemy==2.0.36
 alembic==1.13.1
 
 # Authentication & Security
