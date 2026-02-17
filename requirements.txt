@@ -22,4 +22,4 @@ python-dateutil==2.8.2
 email-validator==2.3.0
 
 # PostgreSQL (for production)
-psycopg2-binary==2.9.9
+psycopg2-binary==2.9.10
