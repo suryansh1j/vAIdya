@@ -5,12 +5,8 @@ python-multipart==0.0.6
 
 # Audio Processing
 pydub==0.25.1
-faster-whisper==0.10.0
-
-# NLP & ML (using versions with pre-built wheels)
-spacy==3.7.4
-transformers==4.37.0
-negspacy==1.0.4
+# Note: faster-whisper removed - requires compilation
+# Use alternative: openai-whisper or speech_recognition
 
 # Database
 sqlalchemy==2.0.25
