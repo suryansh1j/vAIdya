@@ -4,9 +4,8 @@ uvicorn[standard]==0.27.0
 python-multipart==0.0.6
 
 # Audio Processing
-pydub==0.25.1
-# Note: faster-whisper removed - requires compilation
-# Use alternative: openai-whisper or speech_recognition
+# Note: pydub, faster-whisper removed - not compatible with Python 3.14
+# Use alternative: openai-whisper or speech_recognition when restoring NLP features
 
 # Database
 sqlalchemy==2.0.36

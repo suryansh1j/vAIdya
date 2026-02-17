@@ -9,7 +9,6 @@ import json
 import re
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
-from pydub import AudioSegment
 
 from .config import settings
 from .logger import logger
