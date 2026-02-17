@@ -37,6 +37,9 @@ services:
       
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "30"
+      
+      - key: ALLOWED_ORIGINS
+        value: "http://localhost:3000,http://localhost:8000,https://v-a-idya.vercel.app"
 
 databases:
   - name: vaidya-db
