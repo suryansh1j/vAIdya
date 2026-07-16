@@ -15,15 +15,15 @@ class Settings:
     
     # Application
     APP_NAME: str = os.getenv("APP_NAME", "vAIdya")
-    DEBUG: bool = os.getenv("DEBUG", "True").lower() == "true"
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
-    
+
     # Server
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
-    
+
     # Security
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "")
     ALGORITHM: str = os.getenv("ALGORITHM", "HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
     
@@ -37,8 +37,10 @@ class Settings:
     MAX_UPLOAD_SIZE_MB: int = int(os.getenv("MAX_UPLOAD_SIZE_MB", "50"))
     MAX_UPLOAD_SIZE_BYTES: int = MAX_UPLOAD_SIZE_MB * 1024 * 1024
     ALLOWED_AUDIO_FORMATS: List[str] = os.getenv(
-        "ALLOWED_AUDIO_FORMATS", 
-        ".m4a,.wav,.mp3,.ogg"
+        "ALLOWED_AUDIO_FORMATS",
+        # .webm/.mp4 are what browser MediaRecorder produces (Chrome/Firefox
+        # record WebM/Opus; Safari records MP4/AAC) — browsers cannot record MP3.
+        ".m4a,.wav,.mp3,.ogg,.webm,.mp4"
     ).split(",")
     
     # ML Models
@@ -57,7 +59,16 @@ class Settings:
     FRONTEND_DIR: Path = BASE_DIR / os.getenv("FRONTEND_DIR", "frontend")
     
     def __init__(self):
-        """Ensure required directories exist."""
+        """Validate settings and ensure required directories exist."""
+        if not self.SECRET_KEY:
+            if self.ENVIRONMENT == "production":
+                raise RuntimeError(
+                    "SECRET_KEY environment variable must be set in production. "
+                    "Generate one with: python -c \"import secrets; print(secrets.token_urlsafe(32))\""
+                )
+            # Development fallback only — never used in production
+            self.SECRET_KEY = "dev-secret-key-change-in-production"
+
         self.AUDIO_DIR.mkdir(exist_ok=True)
         self.TRANSCRIPTS_DIR.mkdir(exist_ok=True)
         

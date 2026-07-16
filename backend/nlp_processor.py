@@ -1,98 +1,35 @@
 """
-NLP processing module - STUB VERSION for deployment without heavy dependencies.
-This version allows the app to deploy and run, but NLP features are disabled.
+NLP pipeline loader.
 
-TODO: Replace with full implementation once deployment issues are resolved.
+Imports the full pipeline (backend.nlp_processor_full) when the optional ML
+dependencies are installed, and otherwise exposes NLP_AVAILABLE = False so
+the API can report the feature as unavailable instead of silently returning
+placeholder data.
+
+Install the optional dependencies with:  pip install -r requirements-ml.txt
 """
-import os
-import json
-import re
-from pathlib import Path
-from typing import Dict, List, Tuple, Optional
-
-from .config import settings
 from .logger import logger
 
+NLP_AVAILABLE: bool
+NLP_UNAVAILABLE_REASON: str = ""
 
-class AudioTranscriber:
-    """Stub: Audio transcription disabled."""
-    
-    def __init__(self):
-        logger.warning("AudioTranscriber: Using stub implementation - transcription disabled")
-    
-    def transcribe(self, audio_path: Path) -> str:
-        """
-        Stub transcription - returns placeholder text.
-        """
-        logger.warning(f"Transcription requested for {audio_path} but feature is disabled (stub)")
-        return "[Transcription feature temporarily disabled - awaiting deployment fix]"
+try:
+    from .nlp_processor_full import NLPPipeline  # noqa: F401
+    NLP_AVAILABLE = True
+    logger.info("Full NLP pipeline available")
+except ImportError as e:
+    NLP_AVAILABLE = False
+    NLP_UNAVAILABLE_REASON = str(e)
+    logger.warning(
+        f"ML dependencies not installed — NLP features disabled ({e}). "
+        "Install them with: pip install -r requirements-ml.txt"
+    )
 
+    class NLPPipeline:  # type: ignore[no-redef]
+        """Placeholder that refuses to run; the API returns 503 before reaching this."""
 
-class SymptomExtractor:
-    """Stub: Symptom extraction disabled."""
-    
-    def __init__(self):
-        logger.warning("SymptomExtractor: Using stub implementation - extraction disabled")
-    
-    def extract(self, transcript: str) -> Dict[str, List[str]]:
-        """
-        Stub extraction - returns empty results.
-        """
-        logger.warning("Symptom extraction requested but feature is disabled (stub)")
-        return {
-            "affirmed": [],
-            "negated": []
-        }
-
-
-class PatientInfoExtractor:
-    """Stub: Patient info extraction disabled."""
-    
-    def __init__(self):
-        logger.warning("PatientInfoExtractor: Using stub implementation - extraction disabled")
-    
-    def extract(self, transcript: str) -> Dict[str, Optional[str]]:
-        """
-        Stub extraction - returns empty patient info.
-        """
-        logger.warning("Patient info extraction requested but feature is disabled (stub)")
-        return {
-            "PatientName": None,
-            "Age": None,
-            "Gender": None,
-            "ChiefComplaint": None,
-            "PastMedicalHistory": None,
-            "FamilyHistory": None,
-            "PreviousSurgeries": None,
-            "Lifestyle": None,
-            "Allergies": None,
-            "CurrentMedications": None,
-        }
-
-
-class NLPPipeline:
-    """Stub NLP processing pipeline."""
-    
-    def __init__(self):
-        logger.warning("NLPPipeline: Using stub implementation - NLP features disabled")
-        self.transcriber = AudioTranscriber()
-        self.symptom_extractor = SymptomExtractor()
-        self.patient_info_extractor = PatientInfoExtractor()
-    
-    def process(self, audio_path: Path) -> Dict:
-        """
-        Stub processing - returns placeholder results.
-        """
-        logger.warning(f"NLP pipeline requested for {audio_path} but features are disabled (stub)")
-        
-        transcript = self.transcriber.transcribe(audio_path)
-        symptoms = self.symptom_extractor.extract(transcript)
-        patient_info = self.patient_info_extractor.extract(transcript)
-        
-        result = {
-            "transcript": transcript,
-            "symptoms": symptoms,
-            "patient_info": patient_info
-        }
-        
-        return result
+        def __init__(self):
+            raise RuntimeError(
+                f"NLP pipeline unavailable: {NLP_UNAVAILABLE_REASON}. "
+                "Install ML dependencies with: pip install -r requirements-ml.txt"
+            )

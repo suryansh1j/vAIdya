@@ -1,40 +1,65 @@
+// Doctor Notes page: loads the selected patient record (set by index.js via
+// localStorage) and lets the doctor review/edit fields and export a PDF.
+
 document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('patientInfoForm');
 
-  // 🔹 Make all textareas auto-resize
-  const textareas = form.querySelectorAll("textarea");
+  // Make all textareas auto-resize
+  const textareas = form.querySelectorAll('textarea');
   textareas.forEach(textarea => {
-    // Initial height adjustment
-    textarea.style.height = textarea.scrollHeight + "px";
-
-    // Auto-resize on input
-    textarea.addEventListener("input", () => {
-      textarea.style.height = "auto";
-      textarea.style.height = textarea.scrollHeight + "px";
+    textarea.style.height = textarea.scrollHeight + 'px';
+    textarea.addEventListener('input', () => {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
     });
   });
 
-  // 🔹 Fetch patient info from server
-  try {
-    const API_BASE_URL = 'https://vaidya-qppb.onrender.com';
-    const response = await fetch(`${API_BASE_URL}/patient-info`);
+  const token = localStorage.getItem('vaidya_token');
+  const patientId = localStorage.getItem('currentPatientId');
 
+  if (!token || !patientId) {
+    alert('No patient selected. Process an audio file or pick a patient from the records tab first.');
+    window.location.href = 'index.html';
+    return;
+  }
+
+  // Map API response fields (snake_case) to form field names (PascalCase)
+  const fieldMap = {
+    PatientName: 'patient_name',
+    Age: 'age',
+    Gender: 'gender',
+    ChiefComplaint: 'chief_complaint',
+    PastMedicalHistory: 'past_medical_history',
+    FamilyHistory: 'family_history',
+    PreviousSurgeries: 'previous_surgeries',
+    Lifestyle: 'lifestyle',
+    Allergies: 'allergies',
+    CurrentMedications: 'current_medications',
+  };
+
+  try {
+    const response = await fetch(`${window.API_BASE}/patients/${patientId}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (response.status === 401) {
+      alert('Session expired. Please login again.');
+      window.location.href = 'index.html';
+      return;
+    }
     if (!response.ok) {
       throw new Error('Failed to fetch patient info');
     }
 
-    const data = await response.json();
-    const info = data.patient_info || {};
+    const patient = await response.json();
 
-    // Populate form fields
-    for (const key in info) {
-      const field = form.elements.namedItem(key);
+    for (const [formName, apiName] of Object.entries(fieldMap)) {
+      const field = form.elements.namedItem(formName);
       if (field) {
-        field.value = info[key] || '';
-        // Adjust height if it's a textarea
-        if (field.tagName.toLowerCase() === "textarea") {
-          field.style.height = "auto";
-          field.style.height = field.scrollHeight + "px";
+        field.value = patient[apiName] || '';
+        if (field.tagName.toLowerCase() === 'textarea') {
+          field.style.height = 'auto';
+          field.style.height = field.scrollHeight + 'px';
         }
       }
     }
@@ -42,67 +67,106 @@ document.addEventListener('DOMContentLoaded', async () => {
     alert('Error loading patient info: ' + err.message);
   }
 
-  // 🔹 Add PDF export button
-  const pdfButton = document.createElement('button');
-  pdfButton.textContent = "Download PDF";
-  pdfButton.type = "button";
-  pdfButton.style.marginTop = "20px";
-  form.insertAdjacentElement("afterend", pdfButton);
+  // Save button — persists edits via PATCH
+  const saveButton = document.createElement('button');
+  saveButton.textContent = 'Save Changes';
+  saveButton.type = 'button';
+  saveButton.style.marginTop = '20px';
+  saveButton.style.marginRight = '10px';
+  form.insertAdjacentElement('afterend', saveButton);
 
-  pdfButton.addEventListener("click", () => {
+  saveButton.addEventListener('click', async () => {
+    const payload = {};
+    for (const [formName, apiName] of Object.entries(fieldMap)) {
+      const field = form.elements.namedItem(formName);
+      if (field) {
+        payload[apiName] = field.value || null;
+      }
+    }
+
+    saveButton.disabled = true;
+    saveButton.textContent = 'Saving...';
+
+    try {
+      const response = await fetch(`${window.API_BASE}/patients/${patientId}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.status === 401) {
+        alert('Session expired. Please login again.');
+        window.location.href = 'index.html';
+        return;
+      }
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail || 'Save failed');
+      }
+
+      saveButton.textContent = 'Saved ✓';
+      setTimeout(() => { saveButton.textContent = 'Save Changes'; }, 2000);
+    } catch (err) {
+      alert('Error saving changes: ' + err.message);
+      saveButton.textContent = 'Save Changes';
+    } finally {
+      saveButton.disabled = false;
+    }
+  });
+
+  // PDF export button
+  const pdfButton = document.createElement('button');
+  pdfButton.textContent = 'Download PDF';
+  pdfButton.type = 'button';
+  pdfButton.className = 'btn-ghost';
+  saveButton.insertAdjacentElement('afterend', pdfButton);
+
+  pdfButton.addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Title
-    doc.setFont("helvetica", "bold");
+    doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
-    doc.text("Doctor's Notes - Patient Info", 105, 20, { align: "center" });
+    doc.text("Doctor's Notes - Patient Info", 105, 20, { align: 'center' });
 
     doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
+    doc.setFont('helvetica', 'normal');
 
-    let y = 50; // 🔹 More space after title
-    const lineHeight = 1;
+    let y = 40;
 
-    for (let element of form.elements) {
-      if (element.name) {
-        let label = element.previousElementSibling?.innerText || element.name;
-        let value = element.value || "N/A";
+    for (const element of form.elements) {
+      if (!element.name) continue;
 
-        // Wrap long text
-        let splitValue = doc.splitTextToSize(value, 120);
+      const label = element.previousElementSibling?.innerText || element.name;
+      const value = element.value || 'N/A';
+      const lines = doc.splitTextToSize(value, 110);
 
-        // 🔹 Print label
-        doc.setFont("helvetica", "bold");
-        doc.text(`${label}:`, 20, y);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`${label}`, 20, y);
+      doc.setFont('helvetica', 'normal');
+      doc.text(lines, 80, y);
 
-        doc.setFont("helvetica", "normal");
-        doc.text(`${splitValue}`, label.length * 2.7 + 20, y);
+      const blockHeight = Math.max(lines.length * 5, 7);
 
-        // Calculate vertical space taken by this field
-        let blockHeight = splitValue.length * lineHeight;
+      doc.setDrawColor(200, 200, 200);
+      doc.setLineWidth(0.2);
+      doc.line(20, y + blockHeight - 3, 190, y + blockHeight - 3);
 
-        // 🔹 Separator line
-        doc.setDrawColor(200, 200, 200);
-        doc.setLineWidth(0.2);
-        doc.line(20, y + blockHeight + 2, 190, y + blockHeight + 2);  // Adjusted the y position for the line
+      y += blockHeight + 4;
 
-        // Move down for next field
-        y += blockHeight + 6;
-
-        // Page break if needed
-        if (y > 270) {
-          doc.addPage();
-          y = 30;
-        }
+      if (y > 270) {
+        doc.addPage();
+        y = 30;
       }
     }
-    // Footer
+
     doc.setFontSize(10);
     doc.setTextColor(120);
-    doc.text("Generated by Patient System", 105, 285, { align: "center" });
+    doc.text('Generated by vAIdya', 105, 285, { align: 'center' });
 
-    // Save as PDF
-    doc.save("Patient_Info.pdf");
+    doc.save('Patient_Info.pdf');
   });
 });

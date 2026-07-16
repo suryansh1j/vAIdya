@@ -1,24 +1,25 @@
 # Core Backend Framework
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-python-multipart==0.0.6
+fastapi==0.139.0
+uvicorn[standard]==0.51.0
+python-multipart==0.0.32
 
-# Audio Processing
-# Note: pydub, faster-whisper removed - not compatible with Python 3.14
-# Use alternative: openai-whisper or speech_recognition when restoring NLP features
+# NLP / audio-processing dependencies are optional and live in
+# requirements-ml.txt. Without them the API runs but /upload-audio
+# returns 503 (health endpoint reports nlp_available: false).
 
 # Database
-sqlalchemy==2.0.36
-alembic==1.13.1
+sqlalchemy==2.0.51
+alembic>=1.13
 
 # Authentication & Security
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-python-dotenv==1.0.0
+python-jose[cryptography]==3.5.0
+bcrypt>=4.1
+python-dotenv>=1.0.0
 
 # Utilities
-python-dateutil==2.8.2
+python-dateutil>=2.8.2
 email-validator==2.3.0
 
-# PostgreSQL (for production)
-psycopg2-binary==2.9.10
+# PostgreSQL (for production) — psycopg v3, has prebuilt wheels for current
+# Python releases; psycopg2-binary lacks these on newer interpreters (e.g. 3.14)
+psycopg[binary]>=3.2

@@ -1,7 +1,7 @@
 // ==================== Authentication Module ====================
+// API base URL comes from config.js (window.API_BASE_URL)
 
-const API_BASE_URL = 'https://vaidya-qppb.onrender.com';
-const AUTH_API = `${API_BASE_URL}/api/v1/auth`;
+const AUTH_API = `${window.API_BASE_URL}/api/v1/auth`;
 const TOKEN_KEY = 'vaidya_token';
 const USER_KEY = 'vaidya_user';
 
@@ -35,6 +35,9 @@ class AuthManager {
             });
 
             if (!response.ok) {
+                if (response.status === 429) {
+                    throw new Error('Too many attempts — please wait a minute and try again.');
+                }
                 const error = await response.json();
                 // Handle FastAPI validation errors (422)
                 if (Array.isArray(error.detail)) {
@@ -74,6 +77,9 @@ class AuthManager {
             });
 
             if (!response.ok) {
+                if (response.status === 429) {
+                    throw new Error('Too many attempts — please wait a minute and try again.');
+                }
                 const error = await response.json();
                 // Handle FastAPI validation errors (422)
                 if (Array.isArray(error.detail)) {
@@ -235,8 +241,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (password.length < 6) {
-            showToast('Password must be at least 6 characters', 'error');
+        if (password.length < 8) {
+            showToast('Password must be at least 8 characters', 'error');
             return;
         }
 

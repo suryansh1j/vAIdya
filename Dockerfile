@@ -25,9 +25,14 @@ RUN pip install --upgrade pip setuptools wheel
 COPY pip.conf /etc/pip.conf
 
 # Copy requirements and install with preference for binary wheels
-COPY requirements.txt .
+COPY requirements.txt requirements-ml.txt ./
 RUN pip install --only-binary=:all: --prefer-binary --no-cache-dir -r requirements.txt || \
     pip install --prefer-binary --no-cache-dir -r requirements.txt
+
+# Full NLP stack (CPU-only torch keeps the image small), plus the spaCy model
+RUN pip install --prefer-binary --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+    pip install --prefer-binary --no-cache-dir -r requirements-ml.txt && \
+    python -m spacy download en_core_web_sm
 
 # Copy application code
 COPY . .

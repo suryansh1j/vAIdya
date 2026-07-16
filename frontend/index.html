@@ -4,11 +4,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>vAIdya - AI-Powered Medical Assistant</title>
+  <title>vAIdya — AI-Powered Medical Assistant</title>
+  <script>
+    // Apply saved theme before paint to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        var t = localStorage.getItem('vaidya_theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="./style/index.css" />
 </head>
 
 <body>
+  <!-- Icon sprite -->
+  <svg class="sprite" aria-hidden="true">
+    <defs>
+      <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></symbol>
+      <symbol id="i-stop" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"/><path d="m7 8 5-5 5 5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+      <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="13" y2="18"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+      <symbol id="i-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 19h16"/></symbol>
+      <symbol id="i-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a1 1 0 0 0 .9 1.5h18.6a1 1 0 0 0 .9-1.5L13.7 3.9a1 1 0 0 0-1.7 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></symbol>
+    </defs>
+  </svg>
+
   <!-- Authentication Modal -->
   <div id="authModal" class="modal">
     <div class="modal-content">
@@ -16,7 +49,7 @@
       <h2 id="authTitle">Login to vAIdya</h2>
 
       <div id="loginForm" class="auth-form">
-        <input type="text" id="loginUsername" name="username" placeholder="Username" required autocomplete="username" />
+        <input type="text" id="loginUsername" name="username" placeholder="Username or email" required autocomplete="username" />
         <input type="password" id="loginPassword" name="password" placeholder="Password" required
           autocomplete="current-password" />
         <button id="loginBtn" class="btn-primary">Login</button>
@@ -26,7 +59,7 @@
       <div id="registerForm" class="auth-form" style="display: none;">
         <input type="text" id="regUsername" name="username" placeholder="Username" required autocomplete="username" />
         <input type="email" id="regEmail" name="email" placeholder="Email" required autocomplete="email" />
-        <input type="password" id="regPassword" name="password" placeholder="Password" required
+        <input type="password" id="regPassword" name="password" placeholder="Password (min 8 characters)" required
           autocomplete="new-password" />
         <input type="text" id="regFullName" name="fullName" placeholder="Full Name (optional)" autocomplete="name" />
         <button id="registerBtn" class="btn-primary">Register</button>
@@ -49,15 +82,21 @@
   <!-- Toast Notifications -->
   <div id="toastContainer" class="toast-container"></div>
 
+  <!-- NLP Unavailable Banner -->
+  <div id="nlpBanner" class="nlp-banner" style="display: none;">
+    <svg><use href="#i-warn"></use></svg>
+    <span>Audio processing is temporarily unavailable on this deployment. Login and patient records still work.</span>
+  </div>
+
   <!-- Main Container -->
   <div class="app-container">
     <!-- Navigation Header -->
     <header class="app-header">
       <div class="logo-section">
         <div class="logo-icon">
-          <svg width="40" height="40" viewBox="0 0 40 40">
-            <circle cx="20" cy="20" r="18" fill="#06B6D4" />
-            <path d="M20 10 L20 30 M10 20 L30 20" stroke="white" stroke-width="3" stroke-linecap="round" />
+          <svg viewBox="0 0 34 34" aria-hidden="true">
+            <circle cx="17" cy="17" r="15" style="fill: var(--accent)" />
+            <path d="M17 9v16M9 17h16" style="stroke: var(--on-accent); fill: none" stroke-width="2.4" stroke-linecap="round" />
           </svg>
         </div>
         <div class="logo-text">
@@ -68,26 +107,32 @@
 
       <nav class="main-nav">
         <button class="nav-tab active" data-tab="audio">
-          <span class="nav-icon">🎤</span>
+          <span class="nav-icon"><svg><use href="#i-mic"></use></svg></span>
           <span class="nav-label">Audio Processing</span>
         </button>
         <button class="nav-tab" data-tab="chat">
-          <span class="nav-icon">💬</span>
+          <span class="nav-icon"><svg><use href="#i-chat"></use></svg></span>
           <span class="nav-label">Chat Assistant</span>
         </button>
         <button class="nav-tab" data-tab="records">
-          <span class="nav-icon">📋</span>
+          <span class="nav-icon"><svg><use href="#i-clipboard"></use></svg></span>
           <span class="nav-label">Patient Records</span>
         </button>
         <button class="nav-tab" data-tab="health">
-          <span class="nav-icon">❤️</span>
+          <span class="nav-icon"><svg><use href="#i-heart"></use></svg></span>
           <span class="nav-label">Health Checker</span>
         </button>
       </nav>
 
       <div class="user-section">
         <span id="userDisplay" class="user-name"></span>
-        <button id="logoutBtn" class="btn-logout" style="display: none;">Logout</button>
+        <button id="themeToggle" class="btn-icon" aria-label="Toggle light and dark theme" title="Toggle theme">
+          <svg class="icon-sun"><use href="#i-sun"></use></svg>
+          <svg class="icon-moon"><use href="#i-moon"></use></svg>
+        </button>
+        <button id="logoutBtn" class="btn-logout" style="display: none;">
+          <svg><use href="#i-logout"></use></svg>Logout
+        </button>
       </div>
     </header>
 
@@ -96,21 +141,23 @@
 
       <!-- TAB 1: Audio Processing -->
       <div id="audioTab" class="tab-pane active">
-        <div class="hero-banner blue-gradient">
-          <div class="hero-icon">📊</div>
-          <h2>AI-Powered Medical Audio Transcription</h2>
-          <p>Record or upload patient consultations for structured notes</p>
-        </div>
+        <section class="hero">
+          <div class="hero-icon"><svg><use href="#i-mic"></use></svg></div>
+          <div class="hero-text">
+            <h2>AI-Powered Medical Audio Transcription</h2>
+            <p>Record or upload patient consultations for structured notes.</p>
+          </div>
+        </section>
 
         <div class="two-column-layout">
           <!-- Left: Audio Recorder -->
           <div class="card recorder-card">
-            <h3>🎤 Record Audio</h3>
+            <h3><svg><use href="#i-mic"></use></svg>Record Audio</h3>
             <div class="recorder-interface">
-              <button id="recordBtn" class="mic-button">
-                <div class="mic-icon">🎙️</div>
+              <button id="recordBtn" class="mic-button" aria-label="Start recording">
+                <svg class="mic-svg"><use href="#i-mic"></use></svg>
               </button>
-              <div id="recordingStatus" class="recording-status"></div>
+              <div id="recordingStatus" class="recording-status">Ready to record</div>
               <div id="timerDisplay" class="timer">00:00</div>
               <audio id="audioPlayback" controls style="display: none;"></audio>
             </div>
@@ -118,12 +165,12 @@
 
           <!-- Right: File Upload -->
           <div class="card upload-card">
-            <h3>📁 Upload Audio File</h3>
+            <h3><svg><use href="#i-upload"></use></svg>Upload Audio File</h3>
             <div class="upload-zone" id="uploadZone">
-              <div class="upload-icon">📎</div>
+              <div class="upload-icon"><svg><use href="#i-upload"></use></svg></div>
               <p class="upload-text">Click to upload or drag and drop</p>
-              <p class="upload-specs">M4A, WAV, MP3, OGG (max 50MB)</p>
-              <input type="file" id="audioFile" accept=".m4a,.wav,.mp3,.ogg" hidden />
+              <p class="upload-specs">M4A, WAV, MP3, OGG, WebM — max 50MB</p>
+              <input type="file" id="audioFile" accept=".m4a,.wav,.mp3,.ogg,.webm,.mp4" hidden />
               <button id="browseBtn" class="btn-secondary">Browse Files</button>
             </div>
             <div id="fileName" class="file-name"></div>
@@ -133,36 +180,36 @@
         <!-- Process Button -->
         <div class="action-section">
           <button id="processBtn" class="btn-process" disabled>
-            <span>🚀 Process Audio</span>
+            <svg><use href="#i-activity"></use></svg><span>Process Audio</span>
           </button>
         </div>
 
         <!-- Results Section -->
         <div id="resultsSection" class="results-section" style="display: none;">
-          <h3 class="results-title">✅ Processing Complete</h3>
+          <h3 class="results-title"><svg><use href="#i-check"></use></svg>Processing Complete</h3>
 
           <!-- Transcript -->
           <div class="card result-card">
-            <h4>📝 Transcript</h4>
+            <h4><svg><use href="#i-file"></use></svg>Transcript</h4>
             <div class="transcript-box" id="transcriptText"></div>
           </div>
 
           <!-- Patient Information -->
           <div class="card result-card">
-            <h4>👤 Patient Information</h4>
+            <h4><svg><use href="#i-clipboard"></use></svg>Patient Information</h4>
             <div class="patient-info-grid" id="patientInfoGrid"></div>
           </div>
 
           <!-- Symptoms -->
           <div class="card result-card">
-            <h4>💊 Symptoms Analysis</h4>
+            <h4><svg><use href="#i-heart"></use></svg>Symptoms Analysis</h4>
             <div class="symptoms-container">
               <div class="symptoms-column">
-                <h5>✅ Affirmed Symptoms</h5>
+                <h5>Affirmed Symptoms</h5>
                 <div id="affirmedSymptoms" class="symptom-list"></div>
               </div>
               <div class="symptoms-column">
-                <h5>❌ Negated Symptoms</h5>
+                <h5>Negated Symptoms</h5>
                 <div id="negatedSymptoms" class="symptom-list"></div>
               </div>
             </div>
@@ -170,9 +217,9 @@
 
           <!-- Actions -->
           <div class="result-actions">
-            <button id="downloadPdfBtn" class="btn-secondary">📄 Download PDF</button>
+            <button id="downloadPdfBtn" class="btn-secondary"><svg><use href="#i-download"></use></svg>Download PDF</button>
             <button id="viewNotesBtn" class="btn-primary" onclick="window.location.href='doctor_notes.html'">
-              📋 View Doctor Notes
+              <svg><use href="#i-clipboard"></use></svg>View Doctor Notes
             </button>
           </div>
         </div>
@@ -180,16 +227,18 @@
 
       <!-- TAB 2: Chat Assistant -->
       <div id="chatTab" class="tab-pane">
-        <div class="hero-banner purple-gradient">
-          <div class="hero-icon">💬</div>
-          <h2>Medical Chat Assistant</h2>
-          <p>AI-powered consultation support and medical queries</p>
-          <span class="badge-beta">Coming Soon</span>
-        </div>
+        <section class="hero">
+          <div class="hero-icon"><svg><use href="#i-chat"></use></svg></div>
+          <div class="hero-text">
+            <h2>Medical Chat Assistant</h2>
+            <p>AI-powered consultation support and medical queries.</p>
+            <span class="badge-beta">Coming Soon</span>
+          </div>
+        </section>
 
         <div class="chat-container">
           <div class="chat-header">
-            <div class="bot-avatar">🤖</div>
+            <div class="bot-avatar"><svg><use href="#i-bot"></use></svg></div>
             <div class="bot-info">
               <h4>Medicine Assistant</h4>
               <p class="status-online">● Online</p>
@@ -198,7 +247,7 @@
 
           <div class="chat-messages">
             <div class="message bot-message">
-              <div class="message-avatar">🤖</div>
+              <div class="message-avatar"><svg><use href="#i-bot"></use></svg></div>
               <div class="message-content">
                 <p>Hello! I'm your Medicine Assistant. I can help you understand how to use your medications, their side
                   effects, interactions, and answer any questions about your prescriptions. How can I help you today?
@@ -217,27 +266,30 @@
 
           <div class="chat-input-container">
             <input type="text" class="chat-input" placeholder="Type your message..." disabled />
-            <button class="send-btn" disabled>Send</button>
+            <button class="send-btn" disabled><svg><use href="#i-send"></use></svg>Send</button>
           </div>
         </div>
       </div>
 
       <!-- TAB 3: Patient Records -->
       <div id="recordsTab" class="tab-pane">
-        <div class="hero-banner green-gradient">
-          <div class="hero-icon">📋</div>
-          <h2>Patient History Database</h2>
-          <p>View and manage all patient consultations</p>
-        </div>
+        <section class="hero">
+          <div class="hero-icon"><svg><use href="#i-clipboard"></use></svg></div>
+          <div class="hero-text">
+            <h2>Patient History Database</h2>
+            <p>View and manage all patient consultations.</p>
+          </div>
+        </section>
 
         <div class="records-layout">
-          <!-- Search and Filter -->
-          <div class="search-section">
+          <!-- Search -->
+          <div class="search-wrap">
+            <svg><use href="#i-search"></use></svg>
             <input type="text" id="patientSearch" class="search-input"
-              placeholder="🔍 Search by name, date, or symptoms..." />
+              placeholder="Search by name, complaint, or transcript…" />
           </div>
 
-          <div class="two-column-layout">
+          <div class="records-grid">
             <!-- Patient List -->
             <div class="card patient-list-card">
               <h4>Patient List</h4>
@@ -250,7 +302,7 @@
             <div class="card patient-detail-card">
               <div id="patientDetail" class="patient-detail">
                 <div class="empty-state-large">
-                  <div class="empty-icon">📄</div>
+                  <div class="empty-icon"><svg><use href="#i-file"></use></svg></div>
                   <p>Select a patient to view details</p>
                 </div>
               </div>
@@ -261,18 +313,20 @@
 
       <!-- TAB 4: Health Checker -->
       <div id="healthTab" class="tab-pane">
-        <div class="hero-banner pink-gradient">
-          <div class="hero-icon">❤️</div>
-          <h2>Symptom Analysis</h2>
-          <p>AI-powered health symptom checker</p>
-          <span class="badge-beta">Coming Soon</span>
-        </div>
+        <section class="hero">
+          <div class="hero-icon"><svg><use href="#i-heart"></use></svg></div>
+          <div class="hero-text">
+            <h2>Symptom Analysis</h2>
+            <p>AI-powered health symptom checker.</p>
+            <span class="badge-beta">Coming Soon</span>
+          </div>
+        </section>
 
         <div class="health-checker-container">
           <div class="symptom-input-section">
             <div class="input-group">
               <input type="text" class="symptom-input" placeholder="Describe symptoms..." disabled />
-              <button class="mic-btn-small" disabled>🎤</button>
+              <button class="mic-btn-small" disabled aria-label="Voice input"><svg><use href="#i-mic"></use></svg></button>
               <button class="analyze-btn" disabled>Analyze</button>
             </div>
           </div>
@@ -280,14 +334,14 @@
           <div class="common-symptoms">
             <h4>Common Symptoms</h4>
             <div class="symptoms-grid">
-              <button class="symptom-chip" disabled>🤒 Fever</button>
-              <button class="symptom-chip" disabled>😷 Cough</button>
-              <button class="symptom-chip" disabled>🤕 Headache</button>
-              <button class="symptom-chip" disabled>💔 Chest Pain</button>
-              <button class="symptom-chip" disabled>🤢 Nausea</button>
-              <button class="symptom-chip" disabled>😴 Fatigue</button>
-              <button class="symptom-chip" disabled>😵 Dizziness</button>
-              <button class="symptom-chip" disabled>🫁 Shortness of Breath</button>
+              <button class="symptom-chip" disabled>Fever</button>
+              <button class="symptom-chip" disabled>Cough</button>
+              <button class="symptom-chip" disabled>Headache</button>
+              <button class="symptom-chip" disabled>Chest Pain</button>
+              <button class="symptom-chip" disabled>Nausea</button>
+              <button class="symptom-chip" disabled>Fatigue</button>
+              <button class="symptom-chip" disabled>Dizziness</button>
+              <button class="symptom-chip" disabled>Shortness of Breath</button>
             </div>
           </div>
         </div>
@@ -296,6 +350,9 @@
     </main>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="./scripts/config.js"></script>
+  <script src="./scripts/theme.js"></script>
   <script src="./scripts/auth.js"></script>
   <script src="./scripts/index.js"></script>
 </body>

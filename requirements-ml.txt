@@ -1,0 +1,18 @@
+# Optional ML dependencies for the full NLP pipeline
+# (transcription, symptom extraction, patient info extraction).
+#
+# Install with:  pip install -r requirements-ml.txt
+# Then download the spaCy model:  python -m spacy download en_core_web_sm
+#
+# Note: these packages need binary wheels for your Python version.
+# As of mid-2026 they are reliable on Python 3.12 (see runtime.txt);
+# newer Python versions may lack wheels for ctranslate2/torch.
+#
+# For CPU-only torch (much smaller download), install torch first with:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+faster-whisper>=1.0.0
+spacy>=3.7.4
+negspacy>=1.0.4
+transformers>=4.37.0
+torch>=2.2.0

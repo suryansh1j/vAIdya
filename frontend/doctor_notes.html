@@ -2,8 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Doctor's Notes - Patient Info</title>
-  <link rel="stylesheet" href="../style/doctor_notes.css" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('vaidya_theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./style/doctor_notes.css" />
 </head>
 <body>
   <h2>Doctor's Notes - Patient Info</h2>
@@ -39,10 +49,10 @@
     <textarea id="CurrentMedications" name="CurrentMedications" rows="2"></textarea><br/>
   </form>
 
-  <button onclick="window.location.href='index.html'">Back to Upload</button>
+  <button class="btn-ghost" onclick="window.location.href='index.html'">Back to Upload</button>
 
-  <script src="../scripts/doctor_notes.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+  <script src="./scripts/config.js"></script>
+  <script src="./scripts/doctor_notes.js"></script>
 </body>
 </html>

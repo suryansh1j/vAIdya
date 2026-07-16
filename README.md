@@ -58,8 +58,14 @@
 git clone https://github.com/yourusername/vAIdya.git
 cd vAIdya
 
-# Install dependencies
+# Install core dependencies
 pip install -r requirements.txt
+
+# Install optional ML dependencies (needed for transcription/extraction;
+# without them the API runs but /upload-audio returns 503)
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements-ml.txt
+python -m spacy download en_core_web_sm
 
 # Set up environment
 copy .env.example .env
@@ -244,6 +250,17 @@ fly deploy
 ```bash
 docker-compose up -d
 ```
+
+---
+
+## ✅ Running Tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+The tests use an in-memory SQLite database and do not require the ML dependencies.
 
 ---
 

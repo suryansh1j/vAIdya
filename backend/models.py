@@ -1,12 +1,15 @@
 """
 Database models for vAIdya application.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
+
+def utcnow() -> datetime:
+    """Timezone-aware replacement for the deprecated datetime.utcnow."""
+    return datetime.now(timezone.utc)
 
 class User(Base):
     """User model for authentication."""
@@ -19,8 +22,8 @@ class User(Base):
     full_name = Column(String(255))
     is_active = Column(Boolean, default=True)
     is_doctor = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow)
+    updated_at = Column(DateTime, default=utcnow, onupdate=utcnow)
     
     # Relationships
     patients = relationship("Patient", back_populates="doctor")
@@ -53,8 +56,8 @@ class Patient(Base):
     symptoms_extracted = Column(Text)  # JSON string
     
     # Metadata
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow)
+    updated_at = Column(DateTime, default=utcnow, onupdate=utcnow)
     
     # Relationships
     doctor = relationship("User", back_populates="patients")
